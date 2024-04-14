@@ -18,21 +18,21 @@
                 <input type="hidden" >
               <div class="card-body">
               <div class="form-group row mb-4">
-                <label for="JudulFoto" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Judul Foto</label>
+                <label for="photo_title" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Judul Foto</label>
                 <div class="col-sm-12 col-md-7">
                     <img class="img-preview img-fluid mb-3 col-sm-5">
-                    <input class="form-control @error('JudulFoto') is-invalid @enderror" type="file" id="JudulFoto" name="JudulFoto" onchange="previewImage()">
+                    <input class="form-control @error('photo_title') is-invalid @enderror" type="file" id="photo_title" name="photo_title" onchange="previewImage()">
                 </div>
               </div>
-              @error('JudulFoto')
+              @error('photo_title')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
               @enderror
 
               <div class="form-group row mb-4">
-                <label for="DeskripsiFoto" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Deskripsi</label>
-                @error('DeskripsiFoto')
+                <label for="photo_description" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Deskripsi</label>
+                @error('photo_description')
                 <p class="text-danger">{{ $message }}</p> 
                 @enderror
                 <div class="col-sm-12 col-md-7">
@@ -74,7 +74,7 @@
 
         <script>
             function previewImage() {
-                const image = document.querySelector('#JudulFoto');
+                const image = document.querySelector('#photo_title');
                 const imgPreview = document.querySelector('.img-preview');
             
                 imgPreview.style.display = 'block';

@@ -28,3 +28,9 @@ Route::get('/category', function () {
     return view('initial-view.category');
 });
 
+
+    Route::get('/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('/photo-data', [PhotoDataController::class, 'index']);
+    Route::get('/profile', [DashboardController::class, 'profile']);
+    Route::resource('/dashboard/photo-data', PhotoDataController::class);
+
