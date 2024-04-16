@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    protected $table = 'users';
     protected $PrimaryKey = 'userId';
     protected $fillable = [
       'username',
@@ -25,6 +27,14 @@ class User extends Authenticatable
       'full_name',
       'address'
     ];
+
+    public function album(){
+        return $this->hasMany(Album::class);
+    }
+
+    public function photo(){
+        return $this->hasMany(Photo::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

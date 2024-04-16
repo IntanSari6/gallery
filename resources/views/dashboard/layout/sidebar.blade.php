@@ -16,6 +16,9 @@
         <li class="dropdown">
             <a class="nav-link {{Request::is('photo-data') ? 'active' : ''}}" href="/photo-data"><i class="fas fa-th-large"></i> <span>Data Foto</span></a>
         </li>
+        <li class="dropdown">
+            <a class="nav-link {{Request::is('album') ? 'active' : ''}}" href="/dashboard/album"><i class="fas fa-columns"></i> <span>Album</span></a>
+        </li>
     </ul>
 
   </div>

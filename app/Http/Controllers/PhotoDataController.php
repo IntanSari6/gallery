@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Photo;
+use App\Models\Album;
 
 class PhotoDataController extends Controller
 {
@@ -13,6 +16,8 @@ class PhotoDataController extends Controller
      */
     public function index()
     {
+        $user = User::all();
+        $album = Album::all();
         return view('dashboard.photo-data.index');
     }
 
@@ -23,6 +28,8 @@ class PhotoDataController extends Controller
      */
     public function create()
     {
+        $user = User::all();
+        $album = Album::all();
         return view ('dashboard.photo-data.create');
     }
 
@@ -34,18 +41,33 @@ class PhotoDataController extends Controller
      */
     public function store(Request $request)
     {
-        $photo= new PhotoData;
-        if ($request->file('photo_title')) {
-           
-            $photo->image = $request->file('photo_title')->store('public');
-        }
-        $photo->photo_description = $request->photo_description;
-        $photo->upload_date = bcrypt($request->upload_date);
-        $photo->file_location = $request->file_location;
-        $photo->save();
+        $request->validate([
+            'photo_title' => 'required',
+            'photo_description' => 'required',
+            'upload_date' => 'required',
+            'file_location' => 'required',
+            'albumId' => 'required', 
+            'userId' => 'required',
+        ]);
 
-        return redirect('/dashboard.photo-data')->with('success','Data Berhasil Ditambahkan');
+        if ($request->file('file_location')) {
+            $extension = $request->file('file_location')->getClientOriginalExtension();
+            $newName = $request->photo_title.'-'.now()->timestamp.'-'.$extension;
+            $path = $request->file('file_location')->storeAs('image', $newName, 'public');
+        }
+
+        $foto = new Photo([
+            'photo_title' => $request->photo_title,
+            'photo_description' => $request->photo_description,
+            'upload_date' => $request->upload_date,
+            'file_location' => $path,
+            'albumId' => $request->albumId,
+            'userId' => $request->userId,
+        ]);
+        $foto->save();
+        return redirect()->route('photo-data')->with('success', 'tambah data sukses');
     }
+    
 
     /**
      * Display the specified resource.

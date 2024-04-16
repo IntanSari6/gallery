@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PhotoDataController;
+use App\Http\Controllers\AlbumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +36,17 @@ Route::get('/category', function () {
     return view('initial-view.category');
 });
 
-Route::group(['middleware' => 'prevent-back-history'],function(){
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware('auth');
-    Route::get('/photo-data', [PhotoDataController::class, 'index'])->middleware('auth');
-    Route::get('/profile', [DashboardController::class, 'profile'])->middleware('auth');
-    Route::resource('/dashboard/photo-data', PhotoDataController::class)->middleware('auth');
-});
+    Route::get('/dashboard', [DashboardController::class, 'dashboard']);
+
+    Route::get('/photo-data', [PhotoDataController::class, 'index']);
+
+    Route::get('/profile', [DashboardController::class, 'profile']);
+
+    Route::resource('/dashboard/photo-data', PhotoDataController::class);
+
+    // Route::get('/album', [AlbumController::class, 'index']);
+    // Route::get('/dashboard/album', [AlbumController::class, 'index']);
+    // Route::get('/dashboard/album/create', [AlbumController::class, 'create']);
+    // Route::post('/dashboard/album/store', [AlbumController::class, 'store']);
+
+    Route::resource('/dashboard/album', AlbumController::class);

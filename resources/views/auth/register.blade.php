@@ -38,14 +38,14 @@
              <div class="mt-4">
                 <x-label for="full_name" :value="__('Nama Lengkap')" />
 
-                <x-input id="full_name" class="block mt-1 w-full" type="text" name="full_name" :value="old('username')" required autofocus />
+                <x-input id="full_name" class="block mt-1 w-full" type="text" name="full_name" :value="old('full_name')" required autofocus />
             </div>
 
              <!-- Address -->
              <div class="mt-4">
                 <x-label for="address" :value="__('Address')" />
 
-                <x-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('username')" required autofocus />
+                <x-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required autofocus />
             </div>
 
             <div class="flex items-center justify-end mt-4">
